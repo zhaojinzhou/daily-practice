@@ -1,4 +1,5 @@
 #include<iostream>
+#include <memory.h>
 #include<vector>
 #define max 1000
 using namespace std;
@@ -17,7 +18,8 @@ void floyd(int distmap[9][9],//可被更新的邻接矩阵，更新后不能确定原有边
                     path[i][j]=k;//记录路径
                 }
 }
-void print(const int &beg,const int &end,
+
+void print( int &beg, int &end,
            int path [9][9])//传引用，避免拷贝，不占用内存空间
            //也可以用栈结构先进后出的特性来代替函数递归 
 {
@@ -27,11 +29,14 @@ void print(const int &beg,const int &end,
         print(path[beg][end],end,path);
     }
     else cout<<"->"<<end;
+    
+    
 }
 int main()
 {
     int beg,end;//含义见下
-    int path [9][9]={-1};
+    int path [9][9];
+    memset(path,-1,sizeof(path));
    
     int distmap[9][9]={{max, 4, max, max, max, max, max, 8, max},
                       {4, max, 8, max, max, max, max, 11, max},
@@ -49,14 +54,23 @@ int main()
 	for(int j=0;j<9;j++)
 	{
 	
-	cout<<distmap[i][j]<<' ';
+	cout<<path[i][j]<<' ';
     }cout<<endl;
 	}
 	
     
     floyd(distmap,path);
     cout<<"计算完毕";
+    
     cout<<endl;
+    	for(int i=0;i<9;i++)
+	{
+	for(int j=0;j<9;j++)
+	{
+	
+	cout<<path[i][j]<<' ';
+    }cout<<endl;
+	}
     for(int i=0;i<9;i++)
 	{
 	for(int j=0;j<9;j++)
@@ -67,6 +81,7 @@ int main()
 	}
 
     cin>>beg>>end;
-    cout<<"最短距离为"<<distmap[beg][end]<<"，打印路径："<<beg;
-    print(beg,end,path);
+    cout<<"最短距离为"<<distmap[beg][end]<<endl;
+   print(beg,end,path);
+   
 }
