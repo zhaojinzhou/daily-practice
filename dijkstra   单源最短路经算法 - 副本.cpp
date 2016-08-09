@@ -63,7 +63,7 @@ void dijkstra(int graph[V][V], int src)
     	u=minDistance(distance,flag);
 		flag[u]=true;
 		for(int i=0;i<V;i++)
-		if(!flag[i]&&graph[u][i]!=INT_MAX&&((distance[u]+graph[u][i])<distance[i]))
+		if(!flag[i]&&(graph[u][i]!=INT_MAX&&graph[u][i]!=0)&&((distance[u]+graph[u][i])<distance[i]))
 		{distance[i]=	(distance[u]+graph[u][i]);
 		pre[i]=u;
 		}
