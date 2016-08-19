@@ -46,33 +46,30 @@ int printSolution(int dist[], int n,int pre[],int src)
 // for a graph represented using adjacency matrix representation
 void dijkstra(int graph[V][V], int src)
 {
-    int distance[V];
-    bool flag[V]={0    };
-    int pre[V];
-    for(int i=0;i<V;i++){
-    	distance[i]=INT_MAX;
-    	
-    }
-    distance[src]=0;
-    int u;
-	for(int i=0;i<V;i++)
-    {
-    	u=minDistance(distance,flag);
-    	flag[u]=1;
-    	for(int j=0;j<V;j++)
-    	{
-	    	if(!flag[j]&&(graph[u][j]!=0&&graph[u][j]!=0)&&(distance[u]+graph[u][j]<distance[j]))
-	    	{
-	    		distance[j]=distance[u]+graph[u][j];
-	    		pre[j]=u;
-	    		
-	    	}
-	    }
-			
-    }
-    
-    printSolution(distance,V,pre,src);
-    
+   int distance[V];
+   int pre[V];
+   bool flag[V];
+   for (int i=0;i<V;i++){
+   distance[i]=INT_MAX;
+   flag[i]=0;	
+   }
+   
+   distance[src]=0;
+   for(int i=0;i<V;i++){
+   	int u=minDistance(distance,flag);
+   	flag[u]=1;
+   	for(int j=0;j<V;j++){
+	   	
+   		if(flag[j]==0&&graph[u][j]!=0&&distance[j]>distance[u]+graph[u][j]){
+		distance[j]=distance[u]+graph[u][j];
+		pre[j]=u;	   	
+	      	
+		   }
+   		}
+   }
+   
+   
+   printSolution(distance,V,pre,src);
 }
  
 // driver program to test above function
