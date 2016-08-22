@@ -47,5 +47,6 @@ int  main() {
     
 	fclose(f);
 	fclose(res);
+	getchar();
     return 0;
 }
