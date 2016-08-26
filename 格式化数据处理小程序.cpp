@@ -21,15 +21,16 @@ int  main() {
 	            sum2+=j;
 					} 
 			else if(-1==r){     //文件指针如果走到文件末尾 返回-1； 
-	            printf("success\n");	            
-	            fprintf(res,"%d%/%d\n",sum1,sum2);
+	            printf("success\n");
+				if(sum2!=0)	            
+	            fprintf(res,"%.2f%% %(%d%/%d%)\n",((double)sum1*100/(double)sum2),sum1,sum2);
 				break;
 				} 
 			else{     //如果格式不对，返回0；提示信息。并将此前的总数打印。 总数全部置零。 
 				
 				printf("请检查文件第%d行输入格式有问题\n",index+1);
-				
-				fprintf(res,"%d%/%d\n",sum1,sum2);
+				if(sum2!=0)	     
+				fprintf(res,"%.2f%% %(%d%/%d%)\n",((double)sum1*100/(double)sum2),sum1,sum2);
 				sum2=0;
 				sum1=0;
 				fgets(s,1024,f);   //如果格式不对，吧这一行跳过继续运行。
