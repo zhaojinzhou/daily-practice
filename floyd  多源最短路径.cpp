@@ -49,18 +49,11 @@ int main()
                       {max, max, 2, max, max, max, 6, 7, max}
                      };
 
-	for(int i=0;i<9;i++)
-	{
-	for(int j=0;j<9;j++)
-	{
-	
-	cout<<path[i][j]<<' ';
-    }cout<<endl;
-	}
+
 	
     
     floyd(distmap,path);
-    cout<<"计算完毕";
+    cout<<"计算完毕 前一点为：";
     
     cout<<endl;
     	for(int i=0;i<9;i++)
@@ -71,6 +64,7 @@ int main()
 	cout<<path[i][j]<<' ';
     }cout<<endl;
 	}
+	cout<<"最短距离为:"<<endl;
     for(int i=0;i<9;i++)
 	{
 	for(int j=0;j<9;j++)
