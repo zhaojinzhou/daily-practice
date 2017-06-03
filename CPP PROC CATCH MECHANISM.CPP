@@ -5,7 +5,7 @@ using namespace std;
 #define ENDPROC }  tab:
 #define JUDGE(ptr) if (ptr == NULL) THROW();
 #define THROW() goto tab;
-#define CATCH code =123;line=__LINE__;cout<<line<<'\t'<<code;
+#define CATCH code =123;line=__LINE__;cout<<line<<'\t'<<code<<endl;
 
     
 int main()
