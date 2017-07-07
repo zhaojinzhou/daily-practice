@@ -6,7 +6,7 @@ void shellsort( int a[], int size){
 	int i,j,gap;
 	for (gap=size/2;gap>0;gap/=2)
 		for (j=gap;j<size;j++)
-			for (i=j-gap;i>=0&&a[i]>a[i+gap];i--)
+			for (i=j-gap;i>=0&&a[i]>a[i+gap];i-=gap)
 				swap(a[i],a[i+gap]);
 			}
 	
