@@ -1,3 +1,5 @@
+！！！！//总结：递归调用，前序遍历，需要保留，左子树为空的状况必须添加在判断条件
+
 
 //leetcode Construct String from Binary Tree
 
