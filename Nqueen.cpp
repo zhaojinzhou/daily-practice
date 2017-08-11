@@ -59,3 +59,47 @@ public:
 
 
 };
+
+
+
+
+------------------------------------精简版  ---------------------------
+	class Solution {
+public:
+    vector<int> row;
+    vector<int> column;
+    vector<int> diagonal;
+    vector<int> antidiagonal;
+    int res;
+    
+    int totalNQueens(int n) {
+        row.assign(n,0);
+        column.assign(n,0);
+        diagonal.assign(2*n,0);
+        antidiagonal.assign(2*n,0);
+        
+        totalNQueens(0,n-1);
+        
+        
+        return res;
+    }
+    
+    
+    void totalNQueens(int left, int right){
+        if(left>right){
+            res++;
+        }
+        for(int i=0;i<=right;i++){
+            if(column[i]==1||diagonal[left+i]==1||antidiagonal[left-i+right+1]==1){
+                continue;
+            }
+            row[left]=i;
+            column[i]=diagonal[left+i]=antidiagonal[left-i+right+1]=1;
+            totalNQueens(left+1,right);
+            row[left]=0;
+            column[i]=diagonal[left+i]=antidiagonal[left-i+right+1]=0;
+        }
+                
+    }
+    
+};
