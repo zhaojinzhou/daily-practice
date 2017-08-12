@@ -103,3 +103,48 @@ public:
     }
     
 };
+
+
+--------------------------------------
+	
+	
+	class Solution {
+public:
+
+    
+    int totalNQueens(int n) {
+
+            vector<vector<int>> tres;
+            vector<int> res;
+
+        for(int i=0; i<n;i++){
+            res.push_back(i);
+        }
+        tres.push_back(res);
+        while(next_permutation(res.begin(),res.end())){
+            tres.push_back(res);
+        }  
+        int num=0;
+        for(int i=0;i<tres.size();i++){
+         
+        if(istrue(tres[i])){
+            num++;
+        }   
+        }
+        return num;
+    
+    }
+    bool istrue(vector<int> input){
+        vector<bool> diagonal(2*input.size(),0);
+        vector<bool> antidiagonal(2*input.size(),0);
+        
+        for(int i=0;i<input.size();i++){
+            if(diagonal[i+input[i]]==1||antidiagonal[i-input[i]+input.size()]==1){
+                return 0;
+                
+            }
+            diagonal[i+input[i]]=antidiagonal[i-input[i]+input.size()]=1;
+        }
+        return 1;
+    }
+};
