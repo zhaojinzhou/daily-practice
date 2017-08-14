@@ -105,46 +105,34 @@ public:
 };
 
 
---------------------------------------
+------------------使用STL next_permuttation()函数--------------------
 	
-	
-	class Solution {
+class Solution {
 public:
-
-    
     int totalNQueens(int n) {
-
-            vector<vector<int>> tres;
-            vector<int> res;
-
-        for(int i=0; i<n;i++){
-            res.push_back(i);
+        int res=0;
+        vector<int> row;
+        for(int i=0;i<n;i++){
+            row.push_back(i);
         }
-        tres.push_back(res);
-        while(next_permutation(res.begin(),res.end())){
-            tres.push_back(res);
-        }  
-        int num=0;
-        for(int i=0;i<tres.size();i++){
-         
-        if(istrue(tres[i])){
-            num++;
-        }   
+        if(istrue(row)) res++; 
+        while(next_permutation(row.begin(),row.end())){
+            if(istrue(row)) res++;  
         }
-        return num;
+        return res;
+    }
     
-    }
-    bool istrue(vector<int> input){
-        vector<bool> diagonal(2*input.size(),0);
-        vector<bool> antidiagonal(2*input.size(),0);
-        
-        for(int i=0;i<input.size();i++){
-            if(diagonal[i+input[i]]==1||antidiagonal[i-input[i]+input.size()]==1){
-                return 0;
-                
-            }
-            diagonal[i+input[i]]=antidiagonal[i-input[i]+input.size()]=1;
+    bool istrue(vector<int> row){ 
+        int n = row.size();
+        vector<int> diagonal(2*n,0);
+        vector<int> antidiagonal(2*n,0);
+        for(int i=0;i<n;i++){
+            if(diagonal[i+row[i]]==1||antidiagonal[n+i-row[i]]==1) return false;
+            diagonal[i+row[i]]=antidiagonal[n+i-row[i]]=1;
         }
-        return 1;
+        return true;
     }
+    
+ 
+    
 };
