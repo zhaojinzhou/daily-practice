@@ -55,6 +55,11 @@ void dijkstra(int graph[V][V], int src)
    }
    
    distance[src]=0;
+	
+      /*!!!!!!!!!!attention!!!!!!!!!!!!!!!*/
+   //注意一定不能再这里把flag[src]置1。原因是查找最小函数的时候，不把flag=1的列入比较范围，这样导致找不到最小，无法更新distance;
+     /*!!!!!!!!!!attention!!!!!!!!!!!!!!!*/
+	
    for(int i=0;i<V;i++){
    	int u=minDistance(distance,flag);
    	flag[u]=1;
