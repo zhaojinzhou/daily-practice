@@ -1,68 +1,86 @@
 #include <iostream>
+#include <random>
 #include <vector>
+#include <list>
+#include <algorithm>
 #include "gtest/gtest.h"
-// using std::vector;
+/*********************************/
+#include "quicksort.hpp"
+#include "container_print.hpp"
+
+/*********************************/
+
 namespace my {
 namespace project {
-namespace {
 
 // The fixture for testing class Foo.
-class VectorTest : public ::testing::Test {
- protected:
-  // You can remove any or all of the following functions if their bodies would
-  // be empty.
+class QuicksortTest : public ::testing::Test {
+protected:
+   QuicksortTest() {}
 
-  VectorTest() {
-     // You can do set-up work for each test here.
-  }
+   ~QuicksortTest() override {}
 
-  ~VectorTest() override {
-     // You can do clean-up work that doesn't throw exceptions here.
-  }
+   void SetUp() override {}
 
-  // If the constructor and destructor are not enough for setting up
-  // and cleaning up each test, you can define the following methods:
-
-  void SetUp() override {
-     // Code here will be called immediately after the constructor (right
-     // before each test).
-  }
-
-  void TearDown() override {
-     // Code here will be called immediately after each test (right
-     // before the destructor).
-  }
-
-  // Class members declared here can be used by all tests in the test suite
-  // for Foo.
+   void TearDown() override {}
 };
 
-// Tests that the Foo::Bar() method does Abc.
-TEST_F(VectorTest, push_back) {
-    std::vector<int> vec;
-    vec.push_back(10);
-    EXPECT_EQ(vec.size(), 1);
+
+TEST_F(QuicksortTest, quicksort) {
+   typedef std::vector<double> double_vector;
+   const int size = 2000;
+   double_vector double_vec;
+   std::random_device rd;
+
+   for (int i = 0; i < size; i++) {
+      double_vec.push_back(rd()%10000);
+   }
+   #ifdef DEBUG
+   print(double_vec);
+   #endif
+   double_vector primary(double_vec);
+   std::sort(primary.begin(), primary.end());
+   quicksort(double_vec, 0, double_vec.size() - 1);
+
+   #ifdef DEBUG
+   print(primary);
+   print(double_vec);
+   #endif
+   EXPECT_EQ(double_vec, primary);
 }
 
-// Tests that Foo does Xyz.
-TEST_F(VectorTest, pop_back) {
-    // Exercises the Xyz feature of Foo.
-    std::vector<int> vec;
-    vec.push_back(10);
-    EXPECT_EQ(vec.size(), 1);
-    vec.pop_back();
-    EXPECT_EQ(vec.size(), 0);
+TEST_F(QuicksortTest, quicksort_array) {
+   const int size = 1000;
+   double double_vec[size];
+   std::random_device rd;
+   for (int i = 0; i < size; i++) {
+       double_vec[i] = (rd() % 10000 / (double)10000);
+   }
+   double primary[size];
+   std::copy(double_vec, double_vec + size, primary);
+   std::sort(primary, primary + size);
+   quicksort(double_vec, 0 ,size-1);
+
+   #ifdef DEBUG
+   for (int i = 0; i < size; i++) {
+      std::cout << primary[i] << " ";
+   }
+   std::cout << std::endl;
+
+   for (int i = 0; i < size; i++) {
+      std::cout << double_vec[i] << " ";
+   }
+   std::cout << std::endl;
+   #endif
+   EXPECT_EQ(std::equal(double_vec, double_vec + size, primary), true);
 }
 
-
-
-
-
-}  // namespace
 }  // namespace project
 }  // namespace my
 
+
+
 int main(int argc, char **argv) {
-  ::testing::InitGoogleTest(&argc, argv);
-  return RUN_ALL_TESTS();
+   ::testing::InitGoogleTest(&argc, argv);
+   return RUN_ALL_TESTS();
 }
